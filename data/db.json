@@ -1,0 +1,170 @@
+{
+  "expenses": [
+    {
+      "id": 1,
+      "amount": 12.5,
+      "category": "food",
+      "description": "Pret A Manger",
+      "date": "2024-12-01T15:24:00.000Z",
+      "time": "3:24pm"
+    },
+    {
+      "id": 2,
+      "amount": 425.0,
+      "category": "travel",
+      "description": "British Airways - Barcelona",
+      "date": "2024-11-28T09:15:00.000Z",
+      "time": "9:15am"
+    },
+    {
+      "id": 3,
+      "amount": 45.0,
+      "category": "bills",
+      "description": "Sky Broadband",
+      "date": "2024-11-27T10:30:00.000Z",
+      "time": "10:30am"
+    },
+    {
+      "id": 4,
+      "amount": 850.0,
+      "category": "housing",
+      "description": "Rent Payment",
+      "date": "2024-11-25T08:00:00.000Z",
+      "time": "8:00am"
+    },
+    {
+      "id": 5,
+      "amount": 67.8,
+      "category": "food",
+      "description": "Tesco Groceries",
+      "date": "2024-11-24T18:45:00.000Z",
+      "time": "6:45pm"
+    },
+    {
+      "id": 6,
+      "amount": 89.99,
+      "category": "bills",
+      "description": "Electricity Bill",
+      "date": "2024-11-23T14:20:00.000Z",
+      "time": "2:20pm"
+    },
+    {
+      "id": 7,
+      "amount": 23.5,
+      "category": "food",
+      "description": "Starbucks Coffee",
+      "date": "2024-11-22T11:10:00.000Z",
+      "time": "11:10am"
+    },
+    {
+      "id": 8,
+      "amount": 156.0,
+      "category": "travel",
+      "description": "Uber Rides (Monthly)",
+      "date": "2024-11-20T16:30:00.000Z",
+      "time": "4:30pm"
+    },
+    {
+      "id": 9,
+      "amount": 34.99,
+      "category": "bills",
+      "description": "Netflix Subscription",
+      "date": "2024-11-18T00:01:00.000Z",
+      "time": "12:01am"
+    },
+    {
+      "id": 10,
+      "amount": 199.99,
+      "category": "other",
+      "description": "Nike Running Shoes",
+      "date": "2024-11-15T13:45:00.000Z",
+      "time": "1:45pm"
+    },
+    {
+      "id": 11,
+      "amount": 15.0,
+      "category": "food",
+      "description": "Pizza Express",
+      "date": "2024-11-14T19:20:00.000Z",
+      "time": "7:20pm"
+    },
+    {
+      "id": 12,
+      "amount": 75.5,
+      "category": "housing",
+      "description": "Home Insurance",
+      "date": "2024-11-12T09:00:00.000Z",
+      "time": "9:00am"
+    },
+    {
+      "id": 13,
+      "amount": 320.0,
+      "category": "travel",
+      "description": "Train Tickets - London",
+      "date": "2024-11-10T07:30:00.000Z",
+      "time": "7:30am"
+    },
+    {
+      "id": 14,
+      "amount": 48.2,
+      "category": "food",
+      "description": "Whole Foods Market",
+      "date": "2024-11-08T17:15:00.000Z",
+      "time": "5:15pm"
+    },
+    {
+      "id": 15,
+      "amount": 12.99,
+      "category": "bills",
+      "description": "Spotify Premium",
+      "date": "2024-11-05T00:01:00.000Z",
+      "time": "12:01am"
+    }
+  ],
+  "categories": [
+    {
+      "id": "food",
+      "emoji": "🍔",
+      "label": "Food",
+      "color": "#ff6b35"
+    },
+    {
+      "id": "travel",
+      "emoji": "✈️",
+      "label": "Travel",
+      "color": "#4ecdc4"
+    },
+    {
+      "id": "bills",
+      "emoji": "📄",
+      "label": "Bills",
+      "color": "#95a5a6"
+    },
+    {
+      "id": "housing",
+      "emoji": "🏠",
+      "label": "Housing",
+      "color": "#a29bfe"
+    },
+    {
+      "id": "other",
+      "emoji": "💰",
+      "label": "Other",
+      "color": "#fdcb6e"
+    }
+  ],
+  "exchangeRates": {
+    "GBP": 1,
+    "EUR": 1.17,
+    "USD": 1.27,
+    "JPY": 189.45,
+    "AUD": 1.93
+  },
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "currency": "GBP",
+    "monthlyBudget": 5500
+  }
+}

@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  /* Main Backgrounds */
+  --main-bg-start: #0f172a;
+  --main-bg-middle: #1e293b;
+  --main-bg-end: #0f172a;
+
+  /* Card Surfaces */
+  --card-bg: rgba(30, 41, 59, 0.5);
+  --card-border: #334155;
+  --card-hover: rgba(51, 65, 85, 0.5);
+
+  /* Primary Accent */
+  --accent-primary: #2563eb;
+  --accent-secondary: #0891b2;
+  --accent-primary-hover: #1d4ed8;
+  --accent-secondary-hover: #0e7490;
+
+  /* Category Colors */
+  --category-food: #ff6b35;
+  --category-travel: #4ecdc4;
+  --category-bills: #95a5a6;
+  --category-housing: #a29bfe;
+  --category-other: #fdcb6e;
+
+  /* Interactive Elements */
+  --button-active: #2563eb;
+  --button-hover: #475569;
+  --button-default: #334155;
+
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Status Colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --danger-hover: #fca5a5;
+
+  /* Glass Effect */
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --overlay: rgba(51, 65, 85, 0.3);
+}
