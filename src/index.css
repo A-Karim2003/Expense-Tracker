@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  /* Main Backgrounds */
-  --main-bg-start: #0f172a;
-  --main-bg-middle: #1e293b;
-  --main-bg-end: #0f172a;
-
   /* Card Surfaces */
   --card-bg: rgba(30, 41, 59, 0.5);
   --card-border: #334155;
@@ -31,8 +26,7 @@
 
   /* Text Colors */
   --text-primary: #ffffff;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-secondary: #d6d7d8;
 
   /* Status Colors */
   --success: #10b981;
