@@ -6,8 +6,7 @@ const initialState = {
   error: null,
 };
 
-//? Fetch Expenses when application loads
-
+//? Fetch Expenses when application loads first time
 const fetchExpenses = createAsyncThunk("expenses/fetchExpenses", async () => {
   const res = await fetch(`http://localhost:9000/expenses`, {
     method: "GET",
@@ -16,7 +15,7 @@ const fetchExpenses = createAsyncThunk("expenses/fetchExpenses", async () => {
     },
   });
   const data = await res.json();
-  console.log(data);
+  return data;
 });
 
 const expenseSlice = createSlice({
@@ -30,17 +29,20 @@ const expenseSlice = createSlice({
 
   //* Handles actions created outside of slice (e.g. async functions)
   extraReducers: (builder) => {
-    builder.addCase(fetchExpenses.pending, (state, action) => {});
-    builder.addCase(fetchExpenses.fulfilled, (state, action) => {
-      console.log("State:", state);
-      console.log("Action:", action);
+    builder.addCase(fetchExpenses.pending, (state) => {
+      state.status = "loading";
     });
-    builder.addCase(fetchExpenses.rejected, (state, action) => {});
+    builder.addCase(fetchExpenses.fulfilled, (state, action) => {
+      state.expenses = action.payload;
+      state.status = "success";
+    });
+    builder.addCase(fetchExpenses.rejected, (state) => {
+      state.status = "error";
+    });
   },
 });
 
 export const { addExpense, updateExpense, deleteExpense } =
   expenseSlice.actions;
 export { fetchExpenses };
-
 export default expenseSlice.reducer;
