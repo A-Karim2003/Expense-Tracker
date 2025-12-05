@@ -1,15 +1,8 @@
-import { useState, useEffect } from "react";
+import { useCallback } from "react";
 
 export default function useConvertCurrency() {
-  const [convertedAmount, setConvertedAmount] = useState(null);
-  const [status, setStatus] = useState(false);
-  const [error, setError] = useState(null);
-
-  async function convertCurrency(from, to, amount) {
+  const convertCurrency = useCallback(async function (from, to, amount) {
     if (!from || !to || !amount) return;
-
-    setStatus("status");
-    setError(null);
 
     try {
       const res = await fetch(
@@ -24,14 +17,12 @@ export default function useConvertCurrency() {
 
       const { rates } = await res.json();
       const result = (amount * rates[to]).toFixed(2);
-      setConvertedAmount(result);
-      setStatus("success");
-
       return result;
     } catch (e) {
-      setError(e.message);
+      console.error(e.message);
+      return null;
     }
-  }
+  }, []);
 
-  return { convertCurrency, convertedAmount, status, error };
+  return { convertCurrency };
 }

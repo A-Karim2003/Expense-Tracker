@@ -10,8 +10,7 @@ import useConvertCurrency from "../hooks/useConvertCurrency";
 
 function ThisMonthSection() {
   const dispatch = useDispatch();
-  const { convertCurrency, convertedAmount, status, error } =
-    useConvertCurrency();
+  const { convertCurrency } = useConvertCurrency();
 
   const { expenses, status: expensesStatus } = useSelector(
     (store) => store.expenses
@@ -19,7 +18,9 @@ function ThisMonthSection() {
   const { currencies, status: currenciesStatus } = useSelector(
     (store) => store.currencies
   );
-  const [convertedAmounts, setConvertedAmounts] = useState({});
+
+  const [convertedAmounts, setConvertedAmounts] = useState([]);
+  const [convertedAmountsStatus, setConvertedAmountsStatus] = useState("idle");
 
   const currMonth = new Date().getMonth() + 1;
   const currentMonth = expenses.filter((expense) => {
@@ -31,8 +32,6 @@ function ThisMonthSection() {
     return (acc += transaction.amount);
   }, 0);
 
-  // 81.64
-
   useEffect(() => {
     dispatch(fetchCurrencyTypes());
   }, []);
@@ -40,24 +39,43 @@ function ThisMonthSection() {
   //? preload convertedAmounts state with converted currency values
   useEffect(() => {
     if (currencies.length === 0 || !totalCurrMonthSpending) return;
+    setConvertedAmountsStatus("loading");
 
     const converted = {};
     async function loadData() {
       for (const currency of currencies) {
-        if (currency.code === "GBP") continue;
+        if (currency.code === "GBP") {
+          converted[currency.code] = {
+            convertedValue: totalCurrMonthSpending,
+            symbol: currency.symbol,
+          };
+          continue;
+        }
 
-        converted[currency.code] = await convertCurrency(
-          "GBP",
-          currency.code,
-          totalCurrMonthSpending
-        );
+        converted[currency.code] = {
+          convertedValue: await convertCurrency(
+            "GBP",
+            currency.code,
+            totalCurrMonthSpending
+          ),
+          symbol: currency.symbol,
+        };
       }
 
-      console.log(converted);
+      setConvertedAmounts(converted);
+      setConvertedAmountsStatus("success");
     }
 
     loadData();
   }, [currencies, totalCurrMonthSpending]);
+
+  const isLoading =
+    convertedAmountsStatus === "loading" ||
+    expensesStatus === "loading" ||
+    currenciesStatus === "loading";
+
+  const isSuccessful =
+    expensesStatus === "success" && currenciesStatus === "success";
 
   return (
     <SectionContainer
@@ -65,15 +83,14 @@ function ThisMonthSection() {
       SectionNav={<DisplayDate />}
       className="bg-linear-to-r from-(--accent-primary) to-(--accent-secondary)"
     >
-      {(expensesStatus === "loading" || currenciesStatus === "loading") && (
-        <LoadingSpinner />
-      )}
-      {(expensesStatus === "success" || currenciesStatus === "success") &&
-        currencies.map((currency) => {
+      {isLoading && <LoadingSpinner />}
+
+      {isSuccessful &&
+        Object.entries(convertedAmounts).map(([key, value]) => {
           return (
-            <Card key={currency.id}>
+            <Card key={key}>
               <h3 className="text-white text-2xl font-bold tracking-[2px] mb-2">
-                {`${currency.symbol}1400.30`}
+                {`${value.symbol}${value.convertedValue}`}
               </h3>
               <Small text={"+17.0%"} />
             </Card>
