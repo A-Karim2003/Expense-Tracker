@@ -17,7 +17,7 @@ export default function useConvertCurrency() {
 
       const { rates } = await res.json();
       const result = (amount * rates[to]).toFixed(2);
-      return result;
+      return Number(result);
     } catch (e) {
       console.error(e.message);
       return null;

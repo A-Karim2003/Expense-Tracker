@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 import { fetchCurrencyTypes } from "../features/currencies/currenciesSlice";
 import LoadingSpinner from "../components/LoadingSpinner";
 import useConvertCurrency from "../hooks/useConvertCurrency";
+import formatCurrency from "../utils/formatCurrency";
+import getMonthlyExpenses from "../utils/getMonthlyExpenses";
+import getTotalMonthlySpending from "../utils/getTotalMonthlySpending";
+import calculatePercentage from "../utils/calculatePercentage";
 
 function ThisMonthSection() {
   const dispatch = useDispatch();
@@ -23,14 +27,14 @@ function ThisMonthSection() {
   const [convertedAmountsStatus, setConvertedAmountsStatus] = useState("idle");
 
   const currMonth = new Date().getMonth() + 1;
-  const currentMonth = expenses.filter((expense) => {
-    const month = new Date(expense.date).getMonth() + 1;
-    return month === currMonth && expense;
-  });
+  const prevMonth = currMonth - 1;
+  const totalCurrMonthSpending = getTotalMonthlySpending(expenses, currMonth);
+  const totalPrevMonthSpending = getTotalMonthlySpending(expenses, prevMonth);
 
-  const totalCurrMonthSpending = currentMonth.reduce((acc, transaction) => {
-    return (acc += transaction.amount);
-  }, 0);
+  const percentageChange = calculatePercentage(
+    totalCurrMonthSpending,
+    totalPrevMonthSpending
+  );
 
   useEffect(() => {
     dispatch(fetchCurrencyTypes());
@@ -87,12 +91,27 @@ function ThisMonthSection() {
 
       {isSuccessful &&
         Object.entries(convertedAmounts).map(([key, value]) => {
+          const formattedConvertedValue = formatCurrency(
+            value.convertedValue,
+            key
+          );
+
+          const isSelectedCurrency = key === "GBP";
+
           return (
-            <Card key={key}>
+            <Card
+              key={key}
+              className={`${isSelectedCurrency ? "bg-teal-600" : ""}`}
+            >
               <h3 className="text-white text-2xl font-bold tracking-[2px] mb-2">
-                {`${value.symbol}${value.convertedValue}`}
+                {`${formattedConvertedValue}`}
               </h3>
-              <Small text={"+17.0%"} />
+              <Small
+                text={isSelectedCurrency && `${percentageChange}%`}
+                className={`${
+                  percentageChange < 0 ? "text-red-500" : "text-green-500"
+                }`}
+              />
             </Card>
           );
         })}
