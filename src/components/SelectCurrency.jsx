@@ -11,7 +11,7 @@ function SelectCurrency() {
     <select
       value={user.currency}
       className="border border-(--card-border) bg-(--glass-bg) text-white tracking-wide py-2 px-4 rounded-lg hover:bg-(--card-hover) cursor-pointer"
-      onChange={(e) => updateDefaultCurrency(e.target.value)}
+      onChange={(e) => dispatch(updateDefaultCurrency(e.target.value))}
     >
       {currencies.map((currency) => (
         <option key={currency.code} value={currency.code}>

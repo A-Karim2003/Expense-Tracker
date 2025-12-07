@@ -36,25 +36,22 @@ const fetchUser = createAsyncThunk(
 
 const updateDefaultCurrency = createAsyncThunk(
   "user/updateDefaultCurrency",
-  async (currencyCode, { rejectWithValue }) => {
+  async (currencyCode, { getState, rejectWithValue }) => {
+    const { user } = getState().user;
+
     try {
       const res = await fetch(ENDPOINT, {
-        method: "PATCH",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          item: {
-            currency: currencyCode,
-          },
-        }),
+        body: JSON.stringify({ ...user, currency: currencyCode }),
       });
 
       if (!res.ok) throw new Error("Could not update base currency");
 
-      const data = await res.json();
-      return data;
+      return currencyCode;
     } catch (error) {
-      console.log(error.message);
-      rejectWithValue(error.message);
+      console.error(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );

@@ -205,12 +205,10 @@
     }
   ],
   "user": {
-    "item": {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "currency": "GBP",
-      "monthlyBudget": 5500
-    }
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "currency": "AUD",
+    "monthlyBudget": 5500
   }
 }
