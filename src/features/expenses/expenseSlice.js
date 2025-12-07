@@ -7,16 +7,27 @@ const initialState = {
 };
 
 //? Fetch Expenses when application loads first time
-const fetchExpenses = createAsyncThunk("expenses/fetchExpenses", async () => {
-  const res = await fetch(`http://localhost:9000/expenses`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await res.json();
-  return data;
-});
+const fetchExpenses = createAsyncThunk(
+  "expenses/fetchExpenses",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await fetch(`http://localhost:9000/expenses`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) throw new Error("Could not fetch expenses");
+
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error.message);
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const expenseSlice = createSlice({
   name: "expenses",

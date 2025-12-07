@@ -8,7 +8,6 @@ import { fetchCurrencyTypes } from "../features/currencies/currenciesSlice";
 import LoadingSpinner from "../components/LoadingSpinner";
 import useConvertCurrency from "../hooks/useConvertCurrency";
 import formatCurrency from "../utils/formatCurrency";
-import getMonthlyExpenses from "../utils/getMonthlyExpenses";
 import getTotalMonthlySpending from "../utils/getTotalMonthlySpending";
 import calculatePercentage from "../utils/calculatePercentage";
 
@@ -110,7 +109,7 @@ function ThisMonthSection() {
                 text={isSelectedCurrency && `${percentageChange}%`}
                 className={`${
                   percentageChange < 0 ? "text-red-500" : "text-green-500"
-                }`}
+                } text-shadow-md tracking-wider`}
               />
             </Card>
           );

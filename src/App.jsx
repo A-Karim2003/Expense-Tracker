@@ -7,10 +7,13 @@ import RecentActivitySection from "./Sections/RecentActivitySection";
 import { fetchExpenses } from "./features/expenses/expenseSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { fetchUser } from "./features/user/userSlice";
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchExpenses());
+    dispatch(fetchUser());
   }, []);
 
   return (
