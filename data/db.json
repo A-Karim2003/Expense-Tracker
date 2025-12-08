@@ -10,7 +10,7 @@
     },
     {
       "id": "222",
-      "amount": 38.2,
+      "amount": 40,
       "category": "food",
       "description": "Tesco Meal Prep Groceries",
       "date": "2025-12-01T18:15:00.000Z",
@@ -38,6 +38,14 @@
       "category": "other",
       "description": "Bought a phone",
       "date": "2025-12-07T12:30:00.000Z",
+      "time": "13:30pm"
+    },
+    {
+      "id": "666",
+      "amount": 1150,
+      "category": "housing",
+      "description": "Rent",
+      "date": "2025-12-08T12:30:00.000Z",
       "time": "13:30pm"
     },
     {
@@ -216,7 +224,7 @@
     "id": 1,
     "name": "John Doe",
     "email": "john.doe@example.com",
-    "currency": "JPY",
+    "currency": "GBP",
     "monthlyBudget": 5500
   }
 }

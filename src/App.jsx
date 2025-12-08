@@ -6,14 +6,15 @@ import QuickAddSection from "./Sections/QuickAddSection";
 import RecentActivitySection from "./Sections/RecentActivitySection";
 import { fetchExpenses } from "./features/expenses/expenseSlice";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "./features/user/userSlice";
-
+import { fetchCategories } from "./features/categories/categoriesSlice";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchExpenses());
     dispatch(fetchUser());
+    dispatch(fetchCategories());
   }, []);
 
   return (

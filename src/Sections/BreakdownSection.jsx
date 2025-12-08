@@ -10,7 +10,10 @@ function BreakdownSection() {
   const { expenses, status: expensesStatus } = useSelector(
     (store) => store.expenses
   );
-  const { categories, status: categoriesStatus } = usefetchCategories();
+  const { categories, status: categoriesStatus } = useSelector(
+    (store) => store.categories
+  );
+
   const currMonth = new Date().getMonth() + 1;
   const currMonthExpenses = getMonthlyExpenses(expenses, currMonth);
   const prevMonthExpenses = getMonthlyExpenses(expenses, currMonth - 1);

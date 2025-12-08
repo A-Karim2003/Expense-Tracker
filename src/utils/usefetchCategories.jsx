@@ -17,6 +17,7 @@ export default function usefetchCategories() {
         if (!res.ok) throw new Error("Could not fetch categories");
 
         const data = await res.json();
+        console.log("usefetchCategories was called");
 
         setCategories(data);
         setStatus("success");
