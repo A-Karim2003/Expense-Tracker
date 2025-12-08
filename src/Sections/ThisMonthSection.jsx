@@ -10,6 +10,7 @@ import useConvertCurrency from "../hooks/useConvertCurrency";
 import formatCurrency from "../utils/formatCurrency";
 import getTotalMonthlySpending from "../utils/getTotalMonthlySpending";
 import calculatePercentage from "../utils/calculatePercentage";
+import getFormattedText from "../utils/getFormattedText";
 
 function ThisMonthSection() {
   const dispatch = useDispatch();
@@ -74,6 +75,8 @@ function ThisMonthSection() {
     loadData();
   }, [currencies, totalCurrMonthSpending, user]);
 
+  const { message, colourClass } = getFormattedText(percentageChange);
+
   const isLoading =
     convertedAmountsStatus === "loading" ||
     expensesStatus === "loading" ||
@@ -106,10 +109,8 @@ function ThisMonthSection() {
                 {`${formattedConvertedValue}`}
               </h3>
               <Small
-                text={isSelectedCurrency && `${percentageChange}%`}
-                className={`${
-                  percentageChange < 0 ? "text-red-500" : "text-green-500"
-                } text-shadow-md tracking-wider`}
+                text={isSelectedCurrency && `${message}`}
+                className={`${colourClass} text-shadow-md tracking-wider`}
               />
             </Card>
           );

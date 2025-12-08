@@ -13,13 +13,22 @@ function BreakdownSection() {
   const { categories, status: categoriesStatus } = usefetchCategories();
   const currMonth = new Date().getMonth() + 1;
   const currMonthExpenses = getMonthlyExpenses(expenses, currMonth);
-  const CostByCategory = getCostByCategory(currMonthExpenses);
+  const prevMonthExpenses = getMonthlyExpenses(expenses, currMonth - 1);
+
+  const currMonthCostByCategory = getCostByCategory(currMonthExpenses);
+  const prevMonthCostByCategory = getCostByCategory(prevMonthExpenses);
+
+  const { user, status: currencyStatus } = useSelector((store) => store.user);
 
   const isLoading =
-    expensesStatus === "loading" || categoriesStatus === "loading";
+    expensesStatus === "loading" ||
+    categoriesStatus === "loading" ||
+    currencyStatus === "loading";
 
   const isSuccess =
-    categoriesStatus === "success" && expensesStatus === "success";
+    categoriesStatus === "success" &&
+    expensesStatus === "success" &&
+    currencyStatus === "success";
 
   return (
     <SectionContainer SectionTitle={"Breakdown"}>
@@ -29,7 +38,9 @@ function BreakdownSection() {
           <BreakdownContent
             key={category.id}
             category={category}
-            categoryCost={CostByCategory[category.id]}
+            currency={user.currency}
+            currMonthCostByCategory={currMonthCostByCategory[category.id]}
+            prevMonthCostByCategory={prevMonthCostByCategory[category.id]}
           />
         ))}
     </SectionContainer>

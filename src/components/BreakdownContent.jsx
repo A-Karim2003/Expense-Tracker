@@ -4,10 +4,8 @@ import { MdCardTravel } from "react-icons/md";
 import { LiaMoneyBillSolid } from "react-icons/lia";
 import { MdOutlineHouse } from "react-icons/md";
 import formatCurrency from "../utils/formatCurrency";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import useConvertCurrency from "../hooks/useConvertCurrency";
-
+import calculatePercentage from "../utils/calculatePercentage";
+import getFormattedText from "../utils/getFormattedText";
 const categoryIcon = {
   food: IoFastFoodOutline,
   travel: MdCardTravel,
@@ -15,13 +13,21 @@ const categoryIcon = {
   housing: MdOutlineHouse,
 };
 
-function BreakdownSection({ category, categoryCost }) {
-  const {
-    user: { currency },
-  } = useSelector((store) => store.user);
-
+function BreakdownSection({
+  category,
+  currency,
+  currMonthCostByCategory,
+  prevMonthCostByCategory,
+}) {
   const Icon = categoryIcon[category.id];
-  const cost = formatCurrency(categoryCost ?? 0, currency);
+  const cost = formatCurrency(currMonthCostByCategory ?? 0, currency);
+
+  const percentageChange = calculatePercentage(
+    currMonthCostByCategory ?? 0,
+    prevMonthCostByCategory ?? 0
+  );
+
+  const { message, colourClass } = getFormattedText(percentageChange);
 
   return (
     <div className="flex items-center justify-between text-white px-2 hover:bg-(--glass-bg) rounded-lg">
@@ -39,7 +45,10 @@ function BreakdownSection({ category, categoryCost }) {
       </div>
       <div className="flex flex-col items-center">
         <span className="text-[18px]">{cost ?? 0}</span>
-        <Small text={"6%"}></Small>
+        <Small
+          text={message}
+          className={`${colourClass} text-shadow-md tracking-wider`}
+        />
       </div>
     </div>
   );
