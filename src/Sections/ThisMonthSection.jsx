@@ -72,7 +72,7 @@ function ThisMonthSection() {
     }
 
     loadData();
-  }, [currencies, totalCurrMonthSpending, user.currency]);
+  }, [currencies, totalCurrMonthSpending, user]);
 
   const isLoading =
     convertedAmountsStatus === "loading" ||
