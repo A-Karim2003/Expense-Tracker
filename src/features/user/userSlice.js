@@ -3,13 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
   status: "idle",
   error: null,
-  user: {
-    id: 1,
-    name: "John Doe",
-    email: "john.doe@example.com",
-    currency: "GBP",
-    monthlyBudget: 5500,
-  },
+  user: null,
 };
 
 const ENDPOINT = "http://localhost:9000/user";

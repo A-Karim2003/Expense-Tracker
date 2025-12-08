@@ -13,15 +13,3 @@ function Header() {
 }
 
 export default Header;
-
-/*
- 
- "user": {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "currency": "GBP",
-      "monthlyBudget": 5500
-    }
-
- */

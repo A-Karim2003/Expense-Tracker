@@ -22,6 +22,8 @@ function ThisMonthSection() {
     (store) => store.currencies
   );
 
+  const { user, status: userStatus } = useSelector((store) => store.user);
+
   const [convertedAmounts, setConvertedAmounts] = useState([]);
   const [convertedAmountsStatus, setConvertedAmountsStatus] = useState("idle");
 
@@ -37,17 +39,17 @@ function ThisMonthSection() {
 
   useEffect(() => {
     dispatch(fetchCurrencyTypes());
-  }, []);
+  }, [dispatch]);
 
   //? preload convertedAmounts state with converted currency values
   useEffect(() => {
-    if (currencies.length === 0 || !totalCurrMonthSpending) return;
+    if (currencies.length === 0 || !totalCurrMonthSpending || !user) return;
     setConvertedAmountsStatus("loading");
 
     const converted = {};
     async function loadData() {
       for (const currency of currencies) {
-        if (currency.code === "GBP") {
+        if (currency.code === user.currency) {
           converted[currency.code] = {
             convertedValue: totalCurrMonthSpending,
             symbol: currency.symbol,
@@ -57,7 +59,7 @@ function ThisMonthSection() {
 
         converted[currency.code] = {
           convertedValue: await convertCurrency(
-            "GBP",
+            user.currency,
             currency.code,
             totalCurrMonthSpending
           ),
@@ -70,15 +72,13 @@ function ThisMonthSection() {
     }
 
     loadData();
-  }, [currencies, totalCurrMonthSpending]);
+  }, [currencies, totalCurrMonthSpending, user.currency]);
 
   const isLoading =
     convertedAmountsStatus === "loading" ||
     expensesStatus === "loading" ||
-    currenciesStatus === "loading";
-
-  const isSuccessful =
-    expensesStatus === "success" && currenciesStatus === "success";
+    currenciesStatus === "loading" ||
+    userStatus === "loading";
 
   return (
     <SectionContainer
@@ -86,16 +86,16 @@ function ThisMonthSection() {
       SectionNav={<DisplayDate />}
       className="bg-linear-to-r from-(--accent-primary) to-(--accent-secondary)"
     >
-      {isLoading && <LoadingSpinner />}
-
-      {isSuccessful &&
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
         Object.entries(convertedAmounts).map(([key, value]) => {
           const formattedConvertedValue = formatCurrency(
             value.convertedValue,
             key
           );
 
-          const isSelectedCurrency = key === "GBP";
+          const isSelectedCurrency = key === user.currency;
 
           return (
             <Card
@@ -113,7 +113,8 @@ function ThisMonthSection() {
               />
             </Card>
           );
-        })}
+        })
+      )}
     </SectionContainer>
   );
 }
