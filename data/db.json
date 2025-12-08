@@ -27,10 +27,18 @@
     {
       "id": "444",
       "amount": 26.99,
-      "category": "other",
+      "category": "bills",
       "description": "Amazon USB-C Cable + Mouse Mat",
       "date": "2025-12-04T12:30:00.000Z",
       "time": "12:30pm"
+    },
+    {
+      "id": "555",
+      "amount": 699,
+      "category": "other",
+      "description": "Bought a phone",
+      "date": "2025-12-07T12:30:00.000Z",
+      "time": "13:30pm"
     },
     {
       "id": "2",
