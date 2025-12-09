@@ -159,6 +159,14 @@
       "description": "Whole Foods Market",
       "date": "2025-10-18T17:05:00.000Z",
       "time": "5:05pm"
+    },
+    {
+      "id": "21df4219-8f4c-4aa3-9191-72c222d7148b",
+      "amount": 21.99,
+      "category": "other",
+      "description": "Gym membership",
+      "date": "2025-12-09T19:01:59.818Z",
+      "time": "19:01PM"
     }
   ],
   "categories": [

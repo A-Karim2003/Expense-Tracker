@@ -6,7 +6,7 @@ import QuickAddSection from "./Sections/QuickAddSection";
 import RecentActivitySection from "./Sections/RecentActivitySection";
 import { fetchExpenses } from "./features/expenses/expenseSlice";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchUser } from "./features/user/userSlice";
 import { fetchCategories } from "./features/categories/categoriesSlice";
 function App() {
@@ -15,7 +15,7 @@ function App() {
     dispatch(fetchExpenses());
     dispatch(fetchUser());
     dispatch(fetchCategories());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className=" min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">

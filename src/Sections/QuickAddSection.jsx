@@ -1,13 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CategoryOption from "../components/CategoryOption";
 import SectionContainer from "../components/SectionContainer";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useState } from "react";
+import getTime from "../utils/getTime";
+import { addExpense } from "../features/expenses/expenseSlice";
 
 const classes =
   "w-full bg-(--overlay) border border-(--glass-border) py-2 px-4 text-[16px] outline-none focus:ring-2 focus:ring-(--accent-secondary-hover) rounded-xl";
 
 function QuickAddSection() {
+  const dispatch = useDispatch();
   const { categories, status: categoriesStatus } = useSelector(
     (store) => store.categories
   );
@@ -16,17 +19,20 @@ function QuickAddSection() {
   const [expenseDescription, setExpenseDescription] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
 
-  function onSubmit(e) {
+  function submitExpense(e) {
     e.preventDefault();
     if (!expenseAmount || !expenseCategory) return;
 
     const newExpense = {
-      amount: undefined,
+      id: crypto.randomUUID(),
+      amount: Number(expenseAmount),
       category: expenseCategory,
-      description: expenseDescription || "",
-      date: "2025-12-02T14:40:00.000Z",
-      time: "2:40pm",
+      description: expenseDescription,
+      date: new Date().toISOString(),
+      time: getTime(),
     };
+
+    dispatch(addExpense(newExpense));
   }
 
   const isLoading = categoriesStatus === "loading";
@@ -37,7 +43,10 @@ function QuickAddSection() {
       {isLoading && <LoadingSpinner />}
 
       {isSucessful && (
-        <form className=" text-white flex flex-col gap-4" onSubmit={onSubmit}>
+        <form
+          className=" text-white flex flex-col gap-4"
+          onSubmit={submitExpense}
+        >
           <input
             type="number"
             placeholder="£ 0.00"
