@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import getCostByCategory from "../utils/getCostByCategory";
 import getMonthlyExpenses from "../utils/getMonthlyExpenses";
 import LoadingSpinner from "../components/LoadingSpinner";
-import usefetchCategories from "../utils/usefetchCategories";
 
 function BreakdownSection() {
   const { expenses, status: expensesStatus } = useSelector(
