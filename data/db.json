@@ -167,6 +167,14 @@
       "description": "Gym membership",
       "date": "2025-12-09T19:01:59.818Z",
       "time": "19:01PM"
+    },
+    {
+      "id": "e1d9ce4e-4718-43b0-8095-fce65d8c0d17",
+      "amount": 180,
+      "category": "bills",
+      "description": "Car insurance",
+      "date": "2025-12-10T18:27:13.274Z",
+      "time": "18:27PM"
     }
   ],
   "categories": [
