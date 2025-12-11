@@ -77,4 +77,6 @@ npm run dev
 
 The app displays your expenses in multiple currencies simultaneously in the "This Month" section, with your default currency highlighted.
 
-![Alt text description](./path/to/image.png)
+![alt text](public/images/image1.jpeg)
+![alt text](public/images/image2.jpeg)
+![alt text](public/images/image3.jpeg)
