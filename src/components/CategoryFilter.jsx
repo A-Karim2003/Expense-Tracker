@@ -1,8 +1,9 @@
-function CategoryFilter() {
+function CategoryFilter({ filterOption, setFilterOption }) {
   return (
     <select
       className="border py-2 px-4 rounded-lg border-slate-500"
-      defaultValue={"all"}
+      onChange={(e) => setFilterOption(e.target.value)}
+      value={filterOption}
     >
       <option value="all">All</option>
       <option value="food">Food</option>
