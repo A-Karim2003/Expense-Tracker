@@ -1,8 +1,8 @@
-function CategoryFilter({ filterOption, setFilterOption }) {
+function CategoryFilter({ filterOption, onChangeFilter }) {
   return (
     <select
-      className="border py-2 px-4 rounded-lg border-slate-500"
-      onChange={(e) => setFilterOption(e.target.value)}
+      className="bg-slate-800 border py-2 px-4 rounded-lg border-slate-500"
+      onChange={onChangeFilter}
       value={filterOption}
     >
       <option value="all">All</option>

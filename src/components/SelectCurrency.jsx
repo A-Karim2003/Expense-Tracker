@@ -10,7 +10,7 @@ function SelectCurrency() {
   return (
     <select
       value={user?.currency}
-      className="border border-(--card-border) bg-(--glass-bg) text-white tracking-wide py-2 px-4 rounded-lg hover:bg-(--card-hover) cursor-pointer"
+      className="border border-(--card-border) bg-slate-800 text-white tracking-wide py-2 px-4 rounded-lg cursor-pointer"
       onChange={(e) => dispatch(updateDefaultCurrency(e.target.value))}
     >
       {currencies.map((currency) => (

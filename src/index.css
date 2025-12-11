@@ -39,3 +39,23 @@
   --glass-bg: rgba(255, 255, 255, 0.1);
   --overlay: rgba(51, 65, 85, 0.3);
 }
+
+/* Custom scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #334155 #64748b;
+}
+
+/* Chrome, Edge, Safari */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #64748b;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #334155;
+  border-radius: 9999px;
+}

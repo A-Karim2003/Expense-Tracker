@@ -20,6 +20,18 @@ function RecentActivitySection() {
   }, {});
 
   const recentActivities = getRecentActivities(expenses).reverse();
+  // console.log(filterOption);
+
+  function changeFilter(e) {
+    setFilterOption(e.target.value);
+  }
+
+  const filteredActivities = recentActivities.filter((activity) => {
+    if (filterOption === "all") return activity;
+    else {
+      return activity.category === filterOption;
+    }
+  });
 
   return (
     <SectionContainer
@@ -27,48 +39,52 @@ function RecentActivitySection() {
       SectionNav={
         <CategoryFilter
           filterOption={filterOption}
-          setFilterOption={setFilterOption}
+          onChangeFilter={changeFilter}
         />
       }
     >
-      {recentActivities.map((expense) => {
-        const Icon = categoryIcons[expense.category];
-        const amount = formatCurrency(expense.amount, user?.currency);
-        return (
-          <Card
-            className="flex items-center justify-between text-white"
-            key={expense.id}
-          >
-            <div className="flex gap-4 items-center">
-              <div className="flex items-center gap-3">
-                <div
-                  className="flex items-center justify-center h-10 w-10 rounded-md "
-                  style={{ backgroundColor: categoryColors[expense.category] }}
-                >
-                  {Icon ? (
-                    <Icon className="min-w-8 min-h-8 text-white" />
-                  ) : (
-                    "Other"
-                  )}
-                </div>
+      <div className="max-h-[860px] overflow-auto flex flex-col gap-6 custom-scrollbar px-2">
+        {filteredActivities.map((expense) => {
+          const Icon = categoryIcons[expense.category];
+          const amount = formatCurrency(expense.amount, user?.currency);
+          return (
+            <Card
+              className="flex items-center justify-between text-white"
+              key={expense.id}
+            >
+              <div className="flex gap-4 items-center">
+                <div className="flex items-center gap-3">
+                  <div
+                    className="flex items-center justify-center h-10 w-10 rounded-md "
+                    style={{
+                      backgroundColor: categoryColors[expense.category],
+                    }}
+                  >
+                    {Icon ? (
+                      <Icon className="min-w-8 min-h-8 text-white" />
+                    ) : (
+                      "Other"
+                    )}
+                  </div>
 
-                <div className="flex flex-col">
-                  <strong className="text-base font-semibold">
-                    {expense.description}
-                  </strong>
+                  <div className="flex flex-col">
+                    <strong className="text-base font-semibold">
+                      {expense.description}
+                    </strong>
 
-                  <Small text="Food • Yesterday" />
+                    <Small text="Food • Yesterday" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="flex flex-col justify-between items-center">
-              <strong>-{amount}</strong>
-              <Small text={expense.time} />
-            </div>
-          </Card>
-        );
-      })}
+              <div className="flex flex-col justify-between items-center">
+                <strong>-{amount}</strong>
+                <Small text={expense.time} />
+              </div>
+            </Card>
+          );
+        })}
+      </div>
     </SectionContainer>
   );
 }
